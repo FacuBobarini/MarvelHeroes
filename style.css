@@ -51,6 +51,7 @@ body {
 .search{
 	height: 30px;
 	margin-left: 30px;
+	margin-right: 5px;
 	border-color: #100a1f;
 	padding-left: 5px;
 	border-radius: 3px;
@@ -77,6 +78,17 @@ body {
 
 
 
+.myList{
+	color: azure; 
+	cursor: pointer;
+	font-size: 30px;
+	font-weight: 600;
+}
+.myList:hover{
+	transform: scale(1.1);
+}
+
+
 .characterNotFound{
 	color: azure;
 }
@@ -95,6 +107,8 @@ body {
 
 .characterWrap{
 	flex: 1;
+	max-width: 310px;
+	max-height: 360px;
 	justify-content: center;
 }
 
@@ -112,7 +126,7 @@ body {
 }
 .character:hover{
 	transition: .3s ease all ;
-	transform: scale(1.1);
+	transform: scale(1.05);
 	
 }
 
@@ -142,8 +156,31 @@ body {
 	object-fit: cover;
 	width: 100%;
 }
-	
 
+
+
+.hEmpty{
+	position:absolute;
+	color: transparent;
+	transform: translate(2px,0px);
+	transition: .3s ease all;
+}
+.hFull{
+	position:absolute;
+	color: #fbc623;
+	transform: translate(2px,0);
+	transition: .3s ease all;
+	
+}
+.fa-heart-o{
+	position:absolute;
+	color: #010606;
+	transform: translate(2px,3px);
+}
+.hEmpty:hover{
+	color: #010606;
+	transition: .3s ease all;
+}
 
 .pagination {
 	position: fixed;

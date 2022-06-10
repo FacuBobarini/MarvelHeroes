@@ -7,12 +7,10 @@ const sIcon = document.getElementById('sIcon');
 const title = document.getElementById('title');
 let srch = false;
 let page = 0;
-let srchString = ""
+let srchString = "";
 
-function idFnc(id){
-    localStorage.setItem("idCard", id);
 
-}
+
 
 title.addEventListener('click', () => {
     srch = false;
@@ -70,53 +68,38 @@ const characterCatalogue = async () => {
         );
         let characters = '';
         const cards = await res.json();
-        if(cards.data.total < 1){
+        if (cards.data.total < 1) {
             container.innerHTML = `
             <h1 class='characterNotFound'>
-                Hero not nound, try specified full name
+                Hero not found, try specified full name
             </h1>`
-        }else{
-        cards.data.results.map((results) => {
-             characters +=  `
+        } else {
+            cards.data.results.map((results) => {
+                wHeart(results.id);
+                let id = results.id;
+                let hName = results.name;
+                let source = `${results.thumbnail.path}.${results.thumbnail.extension}`;
+
+                characters += `
                     <div class='characterWrap'>
                         <div class='character'>
-                            <a class='charName' onclick='idFnc(${results.id})' href='character.html' >${results.name}</a>
-						    <a  class='charImgWrap' onclick='idFnc(${results.id})' href='character.html' ><img class='charImg' src='${results.thumbnail.path}.${results.thumbnail.extension}'></a>					
-                            </div>
-                    </div>`;                        
-        });
-        srchString = '';
-        container.innerHTML = characters;
-        document.getElementById('pages').innerHTML = page + 1;
+                            <a class='charName' onclick='idFnc(${id})' href='character.html' >${hName}</a>
+						    <a  class='charImgWrap' onclick='idFnc(${id})' href='character.html' ><img class='charImg' src='${source}'></a>					                                
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> 
+                            <a class='${hLike}' id='${id}' onclick='likeFnc(${id},"${hName}","${source}")'><i class="fa fa-heart" aria-hidden="true"></i></div>
+                                
+                        </div>
+                    </div>`;
+            });
+            srchString = '';
+            container.innerHTML = characters;
+            document.getElementById('pages').innerHTML = page + 1;
         }
-        
+
     }
     catch (err) {
         console.log(err)
     }
 }
-
-
-
 characterCatalogue();
-
-
-
-
-function stringCheckout(strings) {
-    for (var i = 0; i < strings.length; i++) {
-        var caracter = strings.charAt(i);
-        if (caracter === ' ') {
-            srchString += '%20';
-        } else {
-            caracter = caracter.toLowerCase()
-            srchString += caracter;
-        }
-    }
-    srch = true;
-    characterCatalogue();
-}
-
-
-
 
